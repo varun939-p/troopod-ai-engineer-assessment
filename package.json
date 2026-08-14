@@ -1,0 +1,16 @@
+{
+  "name": "troopod-ai-engineer-assessment",
+  "version": "1.0.0",
+  "description": "Shopify product seeding script for PureLane homecare products",
+  "main": "seed-products.js",
+  "scripts": {
+    "seed": "node seed-products.js",
+    "generate-csv": "node generate-products-csv.js"
+  },
+  "keywords": ["shopify", "product-seeding", "graphql"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
