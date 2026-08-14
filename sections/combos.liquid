@@ -375,11 +375,11 @@
 
 <section class="combos-section" id="shopify-section-{{ section_id }}" data-section-id="{{ section_id }}">
   <div class="combos-wrap">
-    
+
     <div class="combos-panel-head">
       <span class="combos-kicker">{{ kicker }}</span>
       <h2 class="combos-heading">{{ heading }}</h2>
-      
+
       <div class="combos-rule">
         <i></i>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -388,7 +388,7 @@
         </svg>
         <i></i>
       </div>
-      
+
       {% if subheading != blank %}
         <p class="combos-subheading">{{ subheading }}</p>
       {% endif %}
@@ -399,18 +399,30 @@
         {% assign combo_product_1 = all_products[block.settings.product_1] %}
         {% assign combo_product_2 = all_products[block.settings.product_2] %}
         {% assign combo_product_3 = all_products[block.settings.product_3] %}
-        
+
+        {% comment %}
+          Title priority: merchant-entered text > first assigned product's title > generic fallback.
+          This is what prevents every block from silently repeating the schema's default text.
+        {% endcomment %}
+        {% if block.settings.title != blank %}
+          {% assign combo_title = block.settings.title %}
+        {% elsif combo_product_1 != blank %}
+          {% assign combo_title = combo_product_1.title %}
+        {% else %}
+          {% assign combo_title = 'Combo' %}
+        {% endif %}
+
         <article class="combo-card {% if block.settings.featured %}hero-combo{% endif %}" {{ block.shopify_attributes }}>
-          
+
           <div class="combo-tray">
             {% if block.settings.show_savings %}
               <span class="combo-save">You save {{ block.settings.savings_amount }}</span>
             {% endif %}
-            
+
             {% if block.settings.flag_text != blank %}
               <span class="combo-flag">{{ block.settings.flag_text }}</span>
             {% endif %}
-            
+
             <div class="combo-stack">
               {% if combo_product_1 != blank %}
                 <div class="combo-item">
@@ -418,7 +430,7 @@
                     {{
                       combo_product_1.featured_image
                       | image_url: width: 80
-                      | image_tag: 
+                      | image_tag:
                         loading: 'lazy',
                         alt: combo_product_1.featured_image.alt,
                         widths: '40, 80',
@@ -428,7 +440,7 @@
                   <span class="combo-product-name">{{ combo_product_1.title }}</span>
                 </div>
               {% endif %}
-              
+
               {% if combo_product_2 != blank %}
                 <span class="combo-plus" aria-hidden="true">+</span>
                 <div class="combo-item">
@@ -436,7 +448,7 @@
                     {{
                       combo_product_2.featured_image
                       | image_url: width: 80
-                      | image_tag: 
+                      | image_tag:
                         loading: 'lazy',
                         alt: combo_product_2.featured_image.alt,
                         widths: '40, 80',
@@ -446,7 +458,7 @@
                   <span class="combo-product-name">{{ combo_product_2.title }}</span>
                 </div>
               {% endif %}
-              
+
               {% if combo_product_3 != blank %}
                 <span class="combo-plus" aria-hidden="true">+</span>
                 <div class="combo-item">
@@ -454,7 +466,7 @@
                     {{
                       combo_product_3.featured_image
                       | image_url: width: 80
-                      | image_tag: 
+                      | image_tag:
                         loading: 'lazy',
                         alt: combo_product_3.featured_image.alt,
                         widths: '40, 80',
@@ -466,9 +478,9 @@
               {% endif %}
             </div>
           </div>
-          
+
           <div class="combo-body">
-            <h3 class="combo-title">{{ block.settings.title }}</h3>
+            <h3 class="combo-title">{{ combo_title }}</h3>
             <div class="combo-count">
               {% assign product_count = 0 %}
               {% if combo_product_1 != blank %}{% assign product_count = product_count | plus: 1 %}{% endif %}
@@ -476,9 +488,9 @@
               {% if combo_product_3 != blank %}{% assign product_count = product_count | plus: 1 %}{% endif %}
               {{ product_count }} products
             </div>
-            
+
             <p class="combo-description">{{ block.settings.description }}</p>
-            
+
             <div class="combo-price-row">
               <span class="combo-price-current">{{ block.settings.price }}</span>
               {% if block.settings.compare_price != blank %}
@@ -488,9 +500,9 @@
                 <span class="combo-price-save">{{ block.settings.savings_text }}</span>
               {% endif %}
             </div>
-            
+
             <div class="combo-fine">{{ block.settings.fine_print }}</div>
-            
+
             <a href="{{ block.settings.cta_link }}" class="combo-cta {% if block.settings.featured %}combo-cta-primary{% else %}combo-cta-ghost{% endif %}" aria-label="{{ block.settings.cta_text }}">
               {{ block.settings.cta_text }}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -498,7 +510,7 @@
               </svg>
             </a>
           </div>
-          
+
         </article>
       {% endfor %}
     </div>
@@ -563,7 +575,7 @@
           "type": "text",
           "id": "title",
           "label": "Combo title",
-          "default": "Kitchen essentials"
+          "info": "Leave blank to automatically use the first assigned product's name."
         },
         {
           "type": "textarea",
@@ -620,7 +632,6 @@
           "type": "text",
           "id": "flag_text",
           "label": "Flag text"
-          
         },
         {
           "type": "text",
@@ -638,7 +649,6 @@
           "type": "url",
           "id": "cta_link",
           "label": "CTA button link"
-          
         }
       ]
     }
@@ -649,13 +659,24 @@
       "category": "PureLane",
       "blocks": [
         {
-          "type": "combo"
+          "type": "combo",
+          "settings": {
+            "title": "Kitchen Essentials"
+          }
         },
         {
-          "type": "combo"
+          "type": "combo",
+          "settings": {
+            "title": "Laundry Duo",
+            "featured": true,
+            "flag_text": "Most Loved"
+          }
         },
         {
-          "type": "combo"
+          "type": "combo",
+          "settings": {
+            "title": "Bathroom Refresh"
+          }
         }
       ]
     }

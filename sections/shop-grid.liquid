@@ -293,21 +293,18 @@
     transform: none;
   }
 
-  /* No Image State */
+  /* No Image State - clean placeholder wireframe instead of a text label */
   #shopify-section-{{ section_id }} .shop-card--no-image .shop-shot {
     background: rgba(236,230,247,.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: var(--shop-r-sm);
   }
 
-  #shopify-section-{{ section_id }} .shop-card--no-image .shop-shot::before {
-    content: "No Image";
+  #shopify-section-{{ section_id }} .shop-product-placeholder {
+    width: 55%;
+    height: auto;
+    max-height: 140px;
     color: var(--shop-paper-3);
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .1em;
+    opacity: .5;
   }
 
   /* Long Title Handling */
@@ -323,11 +320,11 @@
 
 <section class="shop-section" id="shopify-section-{{ section_id }}" data-section-id="{{ section_id }}">
   <div class="shop-wrap">
-    
+
     <div class="shop-panel-head">
       <span class="shop-kicker">{{ section.settings.kicker }}</span>
       <h2 class="shop-heading">{{ heading }}</h2>
-      
+
       <div class="shop-rule">
         <i></i>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -336,7 +333,7 @@
         </svg>
         <i></i>
       </div>
-      
+
       {% if subheading != blank %}
         <p class="shop-subheading">{{ subheading }}</p>
       {% endif %}
@@ -346,7 +343,7 @@
       <div class="shop-shelf">
         {% for product in collection.products limit: products_to_show %}
           <article class="shop-card {% unless product.available %}shop-card--sold-out{% endunless %} {% unless product.featured_image %}shop-card--no-image{% endunless %}">
-            
+
             <div class="shop-shot">
               {% if show_badges and product.tags contains 'best-seller' %}
                 <span class="shop-pill">Best seller</span>
@@ -355,26 +352,28 @@
               {% elsif show_badges and product.tags contains 'new' %}
                 <span class="shop-pill">New</span>
               {% endif %}
-              
+
               {% if product.featured_image %}
                 {{
                   product.featured_image
                   | image_url: width: 400
-                  | image_tag: 
+                  | image_tag:
                     loading: 'lazy',
                     alt: product.featured_image.alt,
                     widths: '200, 300, 400',
                     class: 'shop-product-image'
                 }}
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'shop-product-placeholder' }}
               {% endif %}
             </div>
-            
+
             <h4 class="shop-product-title">
               <a href="{{ product.url }}" aria-label="View {{ product.title }}">
                 {{ product.title }}
               </a>
             </h4>
-            
+
             {% if show_rating %}
               <div class="shop-rating">
                 <span class="shop-rating-stars">★★★★★</span>
@@ -383,7 +382,7 @@
                 {% endif %}
               </div>
             {% endif %}
-            
+
             <div class="shop-price">
               <span class="shop-price-current">{{ product.price | money }}</span>
               {% if product.compare_at_price > product.price %}
@@ -392,7 +391,7 @@
                 <span class="shop-price-discount">{{ discount }}% off</span>
               {% endif %}
             </div>
-            
+
             <form method="post" action="/cart/add" class="shop-add-form">
               <input type="hidden" name="id" value="{{ product.variants.first.id }}">
               <button type="submit" class="shop-add-btn" {% unless product.available %}disabled{% endunless %} aria-label="{% if product.available %}Add {{ product.title }} to cart{% else %}{{ product.title }} is sold out{% endif %}">
@@ -403,7 +402,7 @@
                 {% endif %}
               </button>
             </form>
-            
+
           </article>
         {% endfor %}
       </div>

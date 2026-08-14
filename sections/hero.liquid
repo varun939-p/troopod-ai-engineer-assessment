@@ -11,11 +11,8 @@
 {% assign secondary_cta_text = section.settings.secondary_cta_text %}
 {% assign secondary_cta_link = section.settings.secondary_cta_link %}
 {% assign featured_product = section.settings.featured_product %}
-{% assign badge_1_icon = section.settings.badge_1_icon %}
 {% assign badge_1_text = section.settings.badge_1_text %}
-{% assign badge_2_icon = section.settings.badge_2_icon %}
 {% assign badge_2_text = section.settings.badge_2_text %}
-{% assign badge_3_icon = section.settings.badge_3_icon %}
 {% assign badge_3_text = section.settings.badge_3_text %}
 
 <style>
@@ -67,6 +64,7 @@
     }
   }
 
+  /* ---- Layout: real two-column CSS Grid, no absolute-position guesswork ---- */
   #shopify-section-{{ section_id }} .hero-grid {
     max-width: var(--hero-maxw);
     margin: 0 auto;
@@ -74,22 +72,30 @@
     width: 100%;
     position: relative;
     z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+    align-items: end;
+    gap: 32px;
+  }
+
+  @media (max-width: 900px) {
+    #shopify-section-{{ section_id }} .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
   }
 
   #shopify-section-{{ section_id }} .hero-copy {
+    grid-column: 1;
+    grid-row: 1;
     max-width: 600px;
     position: relative;
     z-index: 3;
   }
 
-  @media (max-width: 1200px) {
-    #shopify-section-{{ section_id }} .hero-copy {
-      max-width: 470px;
-    }
-  }
-
   @media (max-width: 900px) {
     #shopify-section-{{ section_id }} .hero-copy {
+      grid-column: 1;
       max-width: none;
     }
   }
@@ -99,7 +105,7 @@
     text-transform: uppercase;
     letter-spacing: -.018em;
     font-weight: 800;
-    line-height: .87;
+    line-height: .94;
     color: var(--hero-surface);
     font-size: clamp(48px, 8.6vw, 112px);
     margin-bottom: 20px;
@@ -200,7 +206,7 @@
     border-radius: 6px;
   }
 
-  /* Badges - Desktop */
+  /* Badges - Desktop (floats over the image column, independent of grid flow) */
   #shopify-section-{{ section_id }} .hero-badges {
     position: absolute;
     right: 18px;
@@ -299,29 +305,24 @@
     }
   }
 
-  /* Product Showcase */
+  /* Product Showcase - now a real grid item, not an absolutely-positioned overlay */
   #shopify-section-{{ section_id }} .hero-prod {
-    position: absolute;
-    right: 2%;
-    bottom: 28px;
-    width: min(50vw, 560px);
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
     z-index: 2;
+    width: 100%;
+    max-width: 480px;
+    margin-left: auto;
+    align-self: end;
     filter: drop-shadow(0 34px 54px rgba(2,20,19,.6));
-  }
-
-  @media (max-width: 1200px) {
-    #shopify-section-{{ section_id }} .hero-prod {
-      width: min(44vw, 440px);
-      right: 3%;
-    }
   }
 
   @media (max-width: 900px) {
     #shopify-section-{{ section_id }} .hero-prod {
-      position: relative;
-      right: auto;
-      bottom: auto;
-      width: min(88vw, 420px);
+      grid-column: 1;
+      grid-row: 2;
+      max-width: min(88vw, 420px);
       margin: 20px auto 0;
     }
   }
@@ -335,7 +336,7 @@
 
 <section class="hero" id="shopify-section-{{ section_id }}" data-section-id="{{ section_id }}">
   <div class="hero-grid">
-    
+
     <!-- Desktop Badges -->
     <div class="hero-badges" aria-label="Product promises">
       <div class="hero-badge">
@@ -370,7 +371,7 @@
     <!-- Hero Copy -->
     <div class="hero-copy">
       <h1 class="hero-d1">{{ heading }}</h1>
-      
+
       <div class="hero-rule">
         <i></i>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -379,9 +380,9 @@
         </svg>
         <i></i>
       </div>
-      
+
       <p class="hero-lede">{{ subheading }}</p>
-      
+
       <div class="hero-cta">
         {% if cta_link != blank and cta_text != blank %}
           <a href="{{ cta_link }}" class="hero-btn hero-btn-primary" aria-label="{{ cta_text }}">
@@ -391,7 +392,7 @@
             </svg>
           </a>
         {% endif %}
-        
+
         {% if secondary_cta_link != blank and secondary_cta_text != blank %}
           <a href="{{ secondary_cta_link }}" class="hero-btn hero-btn-ghost" aria-label="{{ secondary_cta_text }}">
             {{ secondary_cta_text }}
@@ -434,7 +435,7 @@
             {{
               product.featured_image
               | image_url: width: 560
-              | image_tag: 
+              | image_tag:
                 loading: 'lazy',
                 alt: product.featured_image.alt,
                 widths: '280, 420, 560',
