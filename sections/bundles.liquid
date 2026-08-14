@@ -392,7 +392,8 @@
           
           <ul class="bundle-tier-features">
             {% for i in (1..5) %}
-              {% assign feature_text = block.settings["feature_" | append: i] %}
+              {% assign feature_key = 'feature_' | append: i %}
+              {% assign feature_text = block.settings[feature_key] %}
               {% if feature_text != blank %}
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
