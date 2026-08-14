@@ -1,84 +1,265 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "Plant-Based<br>Homecare<br><span class=\"hero-lime\">That Works</span>",
+        "subheading": "Powerful, effective cleaning made from plant-derived ingredients — tough on grime, gentle on your home, your family, and the planet.",
+        "cta_text": "Shop Bestsellers",
+        "cta_link": "/collections/all",
+        "secondary_cta_text": "See How It Works",
+        "secondary_cta_link": "/pages/how-it-works",
+        "featured_product": "",
+        "badge_1_text": "Plant<br>Powered",
+        "badge_2_text": "Safe for<br>Kids & Pets",
+        "badge_3_text": "Zero Harsh<br>Chemicals"
+      }
+    },
+    "shop-grid": {
+      "type": "shop-grid",
+      "settings": {
+        "kicker": "Shop The Range",
+        "heading": "Loved By 30,000+ Homes",
+        "subheading": "Our most-reordered cleaners, picked by real customers across India.",
+        "collection": "",
+        "products_to_show": 8,
+        "show_rating": true,
+        "show_badges": true
+      }
+    },
+    "combos": {
+      "type": "combos",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "combo_1": {
+          "type": "combo",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "featured": false,
+            "title": "Kitchen Essentials",
+            "description": "Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner — everything you need for a sparkling kitchen, bundled together.",
+            "product_1": "",
+            "product_2": "",
+            "product_3": "",
+            "price": "₹499",
+            "compare_price": "₹897",
+            "show_savings": true,
+            "savings_amount": "₹398",
+            "savings_text": "Save ₹398",
+            "flag_text": "",
+            "fine_print": "Inclusive of all taxes · COD available",
+            "cta_text": "Shop Bundle",
+            "cta_link": "#bundles"
           }
         },
-        "button": {
-          "type": "buttons",
+        "combo_2": {
+          "type": "combo",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "featured": true,
+            "title": "Laundry Duo",
+            "description": "Liquid Detergent & Fabric Softener — a gentler wash cycle that's still tough on stains.",
+            "product_1": "",
+            "product_2": "",
+            "product_3": "",
+            "price": "₹399",
+            "compare_price": "₹648",
+            "show_savings": true,
+            "savings_amount": "₹249",
+            "savings_text": "Save ₹249",
+            "flag_text": "Most Loved",
+            "fine_print": "Inclusive of all taxes · COD available",
+            "cta_text": "Shop Bundle",
+            "cta_link": "#bundles"
+          }
+        },
+        "combo_3": {
+          "type": "combo",
+          "settings": {
+            "featured": false,
+            "title": "Bathroom Refresh",
+            "description": "Tap Cleaner, Floor Cleaner & Toilet Cleaner — hard water stains and soap scum, gone.",
+            "product_1": "",
+            "product_2": "",
+            "product_3": "",
+            "price": "₹549",
+            "compare_price": "₹945",
+            "show_savings": true,
+            "savings_amount": "₹396",
+            "savings_text": "Save ₹396",
+            "flag_text": "",
+            "fine_print": "Inclusive of all taxes · COD available",
+            "cta_text": "Shop Bundle",
+            "cta_link": "#bundles"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "combo_1",
+        "combo_2",
+        "combo_3"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "kicker": "Pre-Built To Save You Money",
+        "heading": "Best-Selling Combos",
+        "subheading": "Swipe through the boxes people order most. Each one is already priced below buying the same products separately.",
+        "note_text": "Tapping \"Shop bundle\" opens the bundle picker with these products already added. You can still swap anything before you pay."
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "bundles": {
+      "type": "bundles",
+      "blocks": {
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "featured": false,
+            "tag_text": "",
+            "product_count": "2",
+            "price": "₹349",
+            "compare_price": "₹598",
+            "per_product_text": "Flat ₹174 per product",
+            "product_1": "",
+            "product_2": "",
+            "product_3": "",
+            "product_4": "",
+            "product_5": "",
+            "feature_1": "Pick any two products",
+            "feature_2": "Free shipping across India",
+            "feature_3": "",
+            "feature_4": "",
+            "feature_5": "",
+            "cta_text": "Build This Box",
+            "cta_link": "#shop",
+            "show_arrow": false
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "featured": true,
+            "tag_text": "Most Popular",
+            "product_count": "3",
+            "price": "₹499",
+            "compare_price": "₹897",
+            "per_product_text": "Flat ₹166 per product",
+            "product_1": "",
+            "product_2": "",
+            "product_3": "",
+            "product_4": "",
+            "product_5": "",
+            "feature_1": "Pick any three products",
+            "feature_2": "Free shipping across India",
+            "feature_3": "Priority dispatch",
+            "feature_4": "",
+            "feature_5": "",
+            "cta_text": "Build This Box",
+            "cta_link": "#shop",
+            "show_arrow": true
+          }
+        },
+        "tier_3": {
+          "type": "tier",
+          "settings": {
+            "featured": false,
+            "tag_text": "Whole Home",
+            "product_count": "5",
+            "price": "₹799",
+            "compare_price": "₹1,495",
+            "per_product_text": "Flat ₹160 per product",
+            "product_1": "",
+            "product_2": "",
+            "product_3": "",
+            "product_4": "",
+            "product_5": "",
+            "feature_1": "Pick any five products",
+            "feature_2": "Free shipping across India",
+            "feature_3": "Best value per product",
+            "feature_4": "",
+            "feature_5": "",
+            "cta_text": "Build This Box",
+            "cta_link": "#shop",
+            "show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2",
+        "tier_3"
+      ],
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "kicker": "Build Your Bundle",
+        "heading": "One Box. Every Room.",
+        "subheading": "Mix and match across kitchen, laundry, home and skin. One flat price, no code needed, free shipping either way."
+      }
+    },
+    "reviews-rail": {
+      "type": "reviews-rail",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "title": "Works Like A Charm",
+            "review_text": "Finally a plant-based option that cleans as well as the chemical detergent I used for years, and it smells so much better.",
+            "author_name": "Ananya",
+            "product_reference": "Laundry Detergent"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "title": "Gentle On Hands",
+            "review_text": "Our old dishwash left my hands dry and cracked. That stopped completely within a week of switching.",
+            "author_name": "Priya",
+            "product_reference": "Dishwash Gel"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "title": "Great For Sensitive Skin",
+            "review_text": "Very mild, no harsh smell, and it still gets the job done. My whole family uses it now.",
+            "author_name": "Sunita",
+            "product_reference": "Liquid Handwash"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "title": "Pet-Safe, Finally",
+            "review_text": "We switched because our old floor cleaner was setting off our dog's allergies. Zero reactions since.",
+            "author_name": "Rohit S.",
+            "product_reference": "Floor Cleaner"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "title": "Taps Look New Again",
+            "review_text": "Hard water had completely dulled our bathroom fittings. One spray and the scale wipes right off, no scrubbing needed.",
+            "author_name": "Verified Buyer",
+            "product_reference": "Tap Cleaner"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ],
+      "settings": {
+        "kicker": "That's What They Said",
+        "rating": "4.8",
+        "review_count": "9,200",
+        "customer_count": "30,000",
+        "stars_display": "★★★★★"
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "shop-grid",
+    "combos",
+    "bundles",
+    "reviews-rail"
   ]
 }
